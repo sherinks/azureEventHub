@@ -1,1 +1,18 @@
-
+name: 'Test flow'
+on:
+ workflow_dispatch:
+   inputs:
+     environment:
+       options:
+       - dev
+       - int
+       - stage
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Test writing to ENV'
+        run: echo "key=This is new" >> GITHUB_ENV"
+      - name: 'Get value'
+        run: echo "${{env.key}}"
+       
