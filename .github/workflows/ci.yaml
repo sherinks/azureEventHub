@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Test writing to ENV'
-        run: echo "key=This is new" >> GITHUB_ENV
+        run: echo "key=This is new" >> $GITHUB_ENV
       - name: 'Get value'
         run: echo "${{env.key}}"
        
