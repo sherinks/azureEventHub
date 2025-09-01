@@ -8,6 +8,10 @@ on:
        - int
        - stage
 jobs:
+  call-workflow:
+   uses: sherinks/azureEventHub/.github/workflows/resusable_workflow.yaml@main
+   with:
+    claims: "READ"
   build_test:
     runs-on: ubuntu-latest
     steps:
@@ -15,8 +19,4 @@ jobs:
         run: echo "key=This is new" >> $GITHUB_ENV
       - name: 'Get value'
         run: echo "${{env.key}}"
-      - name: 'print reusable'
-        uses: sherinks/azureEventHub/.github/workflows/resusable_workflow.yaml@main
-        with:
-         claim: "READ"
        
