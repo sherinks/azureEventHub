@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print
-        run: "echo This is the reusable variable ${{input.claim}}"
+        run: "echo This is the reusable variable ${{inputs.claim}}"
