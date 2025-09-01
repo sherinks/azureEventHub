@@ -1,1 +1,13 @@
-
+name: Reusable work
+on:
+  workflow_call:
+    inputs:
+      claim:
+        required: true
+        type: string
+jobs:
+  print-variable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print
+        run: "echo This is the reusable variable ${{input.claim}}"
