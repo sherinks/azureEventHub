@@ -16,7 +16,7 @@ jobs:
       - name: 'Get value'
         run: echo "${{env.key}}"
       - name: 'print reusable'
-        uses: azureEventHub/.github/workflows/resusable_workflow.yaml@main
+        uses: sherinks/azureEventHub/.github/workflows/resusable_workflow.yaml@main
         with:
          claim: "READ"
        
