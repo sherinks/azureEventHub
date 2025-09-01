@@ -1,0 +1,13 @@
+name: Triggered by event
+on:
+  workflow_run: 
+    workflows: ['Test flow']
+    branches: ['main']
+    types:
+    - completed
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Run the print'
+        run: 'echo <<<Printed successfully>>>'
