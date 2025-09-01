@@ -11,7 +11,7 @@ jobs:
   call-workflow:
    uses: sherinks/azureEventHub/.github/workflows/resusable_workflow.yaml@main
    with:
-    claims: "READ"
+    claim: "READ"
   build_test:
     runs-on: ubuntu-latest
     steps:
