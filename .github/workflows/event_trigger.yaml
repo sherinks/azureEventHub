@@ -11,3 +11,4 @@ jobs:
     steps:
       - name: 'Run the print'
         run: "echo <<<Printed successfully>>> "
+        shell: bash
