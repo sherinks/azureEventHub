@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Run the print'
-        run: 'echo <<<Printed successfully>>>'
+        run: "echo <<<Printed successfully>>> "
