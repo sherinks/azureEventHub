@@ -5,11 +5,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-     - name: Get kernal version
+     - name: Get kernel version
        run: |
-         KERNAL_VERSION=$(uname -r)
-         echo "HOST_KERNAL_VER=KERNAL_VERSION">>GITHUB_ENV
-         echo "Kernal version ${{env.HOST_KERNAL_VER}}"
+         KERNEL_VERSION=$(uname -r)
+         echo "HOST_KERNEL_VER=KERNEL_VERSION">>GITHUB_ENV
+         echo "Kernel version ${{ env.HOST_KERNEL_VER }}"
      - name: Run Build Container
        uses: docker://debina:trixie
        with:
@@ -18,6 +18,6 @@ jobs:
             apt-get -y install kmod fuse
             modprobe fuse
        env:
-         HOST_KERNAL_VER: ${{ env.HOST_KERNAL_VER }}
+         HOST_KERNEL_VER: ${{ env.HOST_KERNEL_VER }}
     container:
-      options: "--privileged --device /dev/fuse -v /usr/lib/modules/${{ env.HOST_KERNAL_VER }}:/lib/modules/${{ env.HOST_KERNAL_VER }}:shared"
+      options: "--privileged --device /dev/fuse -v /usr/lib/modules/${{ env.HOST_KERNEL_VER }}:/lib/modules/${{ env.HOST_KERNEL_VER }}:shared"
