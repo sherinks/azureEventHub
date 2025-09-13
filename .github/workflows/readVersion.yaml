@@ -3,14 +3,19 @@ on:
   workflow_dispatch: 
   
 jobs:
-  build:
-    name: Build Container
+  get-kernel-build:
+    name: get-kernel
     runs-on: ubuntu-latest
     steps:
-     - name: get-kernel-version
+     - name: Get kernel version
+       id: get-kernel-version
        run: |
          KERNEL_VERSION=$(uname -r)
          echo "HOST_KERNEL_VER=KERNEL_VERSION">>GITHUB_OUTPUT
+  create:
+    runs-on: ubuntu-latest
+    needs: get-kernel-build
+    steps:
      - name: Run Build Container
        uses: docker://debina:trixie
        with:
@@ -19,4 +24,4 @@ jobs:
             apt-get -y install kmod fuse
             modprobe fuse
     container:
-      options: "--privileged --device /dev/fuse -v /usr/lib/modules/${{ needs.get-kernel-version.output.HOST_KERNEL_VER }}:/lib/modules/${{ needs.get-kernel-version.output.HOST_KERNEL_VER }}:shared"
+      options: "--privileged --device /dev/fuse -v /usr/lib/modules/${{ needs.get-kernel-build.output.HOST_KERNEL_VER }}:/lib/modules/${{ needs.get-kernel-build.output.HOST_KERNEL_VER }}:shared"
