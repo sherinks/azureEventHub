@@ -1,15 +1,16 @@
 name: 'Read Linux verison'
 on:
   workflow_dispatch: 
+  
 jobs:
   build:
+    name: Build Container
     runs-on: ubuntu-latest
     steps:
-     - name: Get kernel version
+     - name: get-kernel-version
        run: |
          KERNEL_VERSION=$(uname -r)
-         echo "HOST_KERNEL_VER=KERNEL_VERSION">>GITHUB_ENV
-         echo "Kernel version ${{ env.HOST_KERNEL_VER }}"
+         echo "HOST_KERNEL_VER=KERNEL_VERSION">>GITHUB_OUTPUT
      - name: Run Build Container
        uses: docker://debina:trixie
        with:
@@ -17,7 +18,5 @@ jobs:
             apt-get update
             apt-get -y install kmod fuse
             modprobe fuse
-       env:
-         HOST_KERNEL_VER: ${{ env.HOST_KERNEL_VER }}
     container:
-      options: "--privileged --device /dev/fuse -v /usr/lib/modules/${{ env.HOST_KERNEL_VER }}:/lib/modules/${{ env.HOST_KERNEL_VER }}:shared"
+      options: "--privileged --device /dev/fuse -v /usr/lib/modules/${{ needs.get-kernel-version.output.HOST_KERNEL_VER }}:/lib/modules/${{ needs.get-kernel-version.output.HOST_KERNEL_VER }}:shared"
