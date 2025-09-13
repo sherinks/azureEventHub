@@ -18,6 +18,6 @@ jobs:
             apt-get -y install kmod fuse
             modprobe fuse
        env:
-         HOST_KERNAL_VERSION: ${{env.HOST_KERNEL_VERSION}}
+         HOST_KERNAL_VER: ${{env.HOST_KERNAL_VER}}
     container:
-      options: "--privileged --device /dev/fuse -v /usr/lib/modules/${{ env.HOST_KERNEL_VERSION }}:/lib/modules/${{ env.HOST_KERNEL_VERSION }}:shared"
+      options: "--privileged --device /dev/fuse -v /usr/lib/modules/${{ env.HOST_KERNAL_VER }}:/lib/modules/${{ env.HOST_KERNAL_VER }}:shared"
